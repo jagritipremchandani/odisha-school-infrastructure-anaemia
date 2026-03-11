@@ -1,0 +1,16 @@
+# ============================================================
+# 11. Merge UDISE infrastructure with NFHS outcomes
+# ============================================================
+
+panel_merged <- udise_2019 %>%
+  left_join(
+    nfhs_20,
+    by = c("district", "state_ut")
+  )
+
+
+
+# ============================================================
+# End of Script
+# panel_merged is the final dataset used for regression analysis
+# ============================================================

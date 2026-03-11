@@ -1,0 +1,49 @@
+# ============================================================
+# 1. Construct infrastructure shares
+# Convert facility counts into proportions of schools
+# ============================================================
+
+infra_vars <- c(
+  "functional_girl_toilet",
+  "functional_drinking_water",
+  "functional_electricity",
+  "boundary_wall",
+  "handwash"
+)
+
+for (v in infra_vars) {
+  
+  share_var <- paste0(v, "_share")
+  
+  udise_2019[[share_var]] <-
+    ifelse(
+      udise_2019$total_number_of_schools > 0,
+      udise_2019[[v]] / udise_2019$total_number_of_schools,
+      NA
+    )
+}
+
+# ============================================================
+# 2. Create infrastructure indices
+# ============================================================
+
+# Full infrastructure index
+full_vars <- paste0(infra_vars, "_share")
+
+udise_2019$infra_index_full <- rowMeans(
+  udise_2019[, full_vars],
+  na.rm = TRUE
+)
+
+
+# 3. WASH-focused infrastructure index
+wash_vars <- c(
+  "functional_girl_toilet_share",
+  "functional_drinking_water_share",
+  "handwash_share"
+)
+
+udise_2019$infra_index_wash <- rowMeans(
+  udise_2019[, wash_vars],
+  na.rm = TRUE
+)
