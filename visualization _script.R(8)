@@ -1,0 +1,141 @@
+# ============================================================
+# Script 5: Descriptive Statistics and Visualization
+# ============================================================
+
+
+# ============================================================
+# 1. Load libraries
+# ============================================================
+
+library(psych)
+library(stargazer)
+
+
+# ============================================================
+# 2. Variables for descriptive statistics
+# ============================================================
+
+vars <- c(
+  "anaemia",
+  "infra_index_full",
+  "infra_index_wash",
+  "sanitation",
+  "drinking_water"
+)
+
+
+# ============================================================
+# 3. Descriptive statistics
+# ============================================================
+
+describe(final_data[vars])
+
+
+# ============================================================
+# 4. Correlation matrix
+# ============================================================
+
+cor(final_data[vars], use = "complete.obs")
+
+
+# ============================================================
+# 5. Regression table
+# ============================================================
+
+stargazer(
+  model1, model2,
+  type = "text",
+  title = "Regression Results: Anaemia vs Infrastructure",
+  dep.var.labels = "Anaemia Prevalence (%)",
+  covariate.labels = c(
+    "Infrastructure Index (Full)",
+    "WASH Index",
+    "Household Sanitation (%)",
+    "Household Drinking Water (%)"
+  ),
+  digits = 3
+)
+
+
+# ============================================================
+# 6. Save Histogram: Full Infrastructure
+# ============================================================
+
+png("output/infra_index_full_distribution.png", width = 1600, height = 1200)
+
+hist(
+  final_data$infra_index_full,
+  main = "Distribution of Full Infrastructure Index",
+  xlab = "Infrastructure Index (0-1)",
+  col = "skyblue",
+  breaks = 10
+)
+
+dev.off()
+
+
+# ============================================================
+# 7. Save Histogram: WASH Infrastructure
+# ============================================================
+
+png("output/infra_index_wash_distribution.png", width = 1600, height = 1200)
+
+hist(
+  final_data$infra_index_wash,
+  main = "Distribution of WASH Infrastructure Index",
+  xlab = "WASH Index (0-1)",
+  col = "lightgreen",
+  breaks = 10
+)
+
+dev.off()
+
+
+# ============================================================
+# 8. Save Scatterplot: Full Infrastructure vs Anaemia
+# ============================================================
+
+png("output/anaemia_vs_full_infrastructure.png", width = 1600, height = 1200)
+
+plot(
+  final_data$infra_index_full,
+  final_data$anaemia,
+  xlab = "Full Infrastructure Index",
+  ylab = "Anaemia Prevalence (%)",
+  main = "Anaemia vs Full Infrastructure",
+  pch = 16,
+  col = "darkblue"
+)
+
+abline(
+  lm(anaemia ~ infra_index_full, data = final_data),
+  col = "red",
+  lwd = 2
+)
+
+dev.off()
+
+
+# ============================================================
+# 9. Save Scatterplot: WASH Infrastructure vs Anaemia
+# ============================================================
+
+png("output/anaemia_vs_wash_infrastructure.png", width = 1600, height = 1200)
+
+plot(
+  final_data$infra_index_wash,
+  final_data$anaemia,
+  xlab = "WASH Infrastructure Index",
+  ylab = "Anaemia Prevalence (%)",
+  main = "Anaemia vs WASH Infrastructure",
+  pch = 16,
+  col = "darkgreen"
+)
+
+abline(
+  lm(anaemia ~ infra_index_wash, data = final_data),
+  col = "red",
+  lwd = 2
+)
+
+dev.off()
