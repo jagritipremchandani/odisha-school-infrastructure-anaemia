@@ -181,4 +181,5 @@ write_csv(
 write_csv(
   log,
   "data_clean/column_coverage_log.csv"
+
 )
