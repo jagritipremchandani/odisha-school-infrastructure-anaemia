@@ -1,13 +1,12 @@
 # ============================================================
-# Script: 02_udise_index_and_merge_nfhs.R
+# Script: 02_UDISE_merge_preparation
 # Project: School Infrastructure and Health Outcomes (Odisha)
 #
 # Purpose:
 # 1. Clean district-level UDISE panel
 # 2. Aggregate school-level data to district-year level
 # 3. Construct school infrastructure indices
-# 4. Prepare NFHS district-level health indicators
-# 5. Merge UDISE infrastructure with NFHS outcomes
+# 4. Prepare UDISE district-level data for merge
 #
 # Output:
 # analysis_panel.csv (final dataset for regression analysis)
@@ -138,4 +137,3 @@ udise_2019 <- udise_2019 %>%
     state_ut = "Odisha",
     district = str_to_upper(str_trim(district_name))
   )
-
