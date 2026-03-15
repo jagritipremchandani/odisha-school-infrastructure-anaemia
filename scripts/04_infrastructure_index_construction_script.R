@@ -1,6 +1,7 @@
 # ============================================================
 # 1. Construct infrastructure shares
 # Convert facility counts into proportions of schools
+#3. Construct infra_index-full and infra_index_wash
 # ============================================================
 
 infra_vars <- c(
