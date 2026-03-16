@@ -6,13 +6,12 @@ This project examines the relationship between school infrastructure availabilit
 
 Using district-level data from UDISE+ (Unified District Information System for Education) and NFHS-5 (National Family Health Survey), the project constructs infrastructure indices and analyzes whether better school infrastructure correlates with lower anaemia prevalence.
 
-The analysis focuses particularly on WASH infrastructure (water, sanitation, and hygiene facilities) in schools.
-
+The analysis focuses particularly on studying correlations between infrastructure and anaemia between districts
 ---
 
 Research Question
 
-Does improved school infrastructure — particularly WASH facilities — correlate with lower anaemia prevalence among women at the district level?
+Does improved school infrastructure — correlate with lower anaemia prevalence among women at the district level?
 
 ---
 
@@ -77,6 +76,7 @@ The analysis proceeds in five main steps:
 
 4. Dataset Merging
    UDISE and NFHS datasets are merged at the district level.
+   
 Data
 District-level administrative data covering 28 districts with the following variables:
 anaemia – prevalence of anaemia among children
@@ -92,6 +92,8 @@ Anaemia ~ Infrastructure Index (Full) + Sanitation + Drinking Water
 Model 2
 Anaemia ~ WASH Infrastructure Index + Sanitation + Drinking Water
 The models are estimated using R and summarized using the broom package.
+
+
 Key Results
 Both models show no statistically significant relationship between WASH infrastructure indices and anaemia prevalence.
 
@@ -102,9 +104,61 @@ Infrastructure indices show positive coefficients, likely reflecting estimation 
 Model 2 provides a slightly better fit but remains inconclusive.
 
 ---
+Exploratory Analysis of Infrastructure and Anaemia
+
+Four plots were generated to visually explore the relationship between district-level infrastructure indices and anaemia prevalence among children.
+
+1. Distribution of Full Infrastructure Index
+-The histogram of the full infrastructure index shows:
+-A wider distribution between 0.74 and 0.88.
+-Evidence of two clusters, roughly around 0.80–0.82 and 0.84–0.86.
+This distribution provides more variability, making it somewhat more suitable for regression analysis compared to the WASH index.
+
+
+---
+
+2. Distribution of WASH Infrastructure Index
+-The histogram of the WASH index shows that:
+-Most districts cluster between 0.93 and 0.96.
+-The distribution is right-skewed, with very few districts below 0.90.
+This pattern indicates a ceiling effect, where infrastructure coverage is already high across most districts, reducing statistical variability.
+
+
+---
+3. Anaemia vs Full Infrastructure Index
+
+The second scatter plot compares anaemia prevalence with the Full Infrastructure Index.
+
+Key observations:
+
+-The full infrastructure index ranges from approximately 0.74 to 0.88, providing a wider spread than the WASH index.
+-The regression line is nearly flat, indicating little to no systematic relationship.
+-Several districts appear as outliers, with both high anaemia and moderate infrastructure scores.
+-Overall, this plot again suggests that infrastructure indices alone do not strongly explain differences in anaemia prevalence across districts.
+
+
+4. Anaemia vs WASH Infrastructure Index
+
+The first scatter plot examines the relationship between the WASH Infrastructure Index and anaemia prevalence.
+
+Key observations:
+
+-The WASH index ranges from approximately 0.88 to 0.97, indicating that most districts have relatively high WASH infrastructure coverage.
+-The regression line shows a slight positive slope, meaning anaemia prevalence marginally increases with higher WASH index values.
+-This pattern is counterintuitive, as improved water, sanitation, and hygiene infrastructure would theoretically reduce anaemia risk.
+-The data points are widely scattered, indicating a very weak relationship between the variables.
+
+A likely explanation is range restriction: because most districts already have high WASH scores, there is limited variation in the predictor variable, making it difficult to detect meaningful correlations.
+
+---
+
+Interpretation
+-The exploratory plots suggest that infrastructure indices alone are weak predictors of anaemia prevalence in the dataset.
+-Several factors may explain this result:
+-Limited variation in WASH infrastructure, creating a ceiling effect.
+-Omitted variables such as dietary diversity, maternal education, poverty levels, and healthcare access.
 
 Repository Structure
-
 school-infrastructure-anaemia-odisha
 
 README.md
@@ -144,20 +198,16 @@ Replication Instructions
 
 1. Download raw UDISE and NFHS datasets.
 2. Place them inside the "data_raw" folder.
-3. Run the scripts in the following order:
-
-01_udise_panel_construction.R
-02_udise_infrastructure_index.R
-03_nfhs_clean.R
-04_merge_analysis.R
-05_descriptive_visualization.R
+3. Run the scripts in the numeric order 
 
 4. Output figures will be saved in the "output/" directory.
 
 ---
 
 Limitations
-
+Several constraints limit inference:
+- Small sample size (n = 28) reduces statistical power
+- Multicollinearity risk due to overlap between infrastructure indices and control variables
 - The analysis is cross-sectional at the district level, limiting causal interpretation.
 - Infrastructure measures are aggregated and may mask school-level variation.
 - Other determinants of anaemia (nutrition, health services, income) are not fully captured.
