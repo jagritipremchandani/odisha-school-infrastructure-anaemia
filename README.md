@@ -41,6 +41,7 @@ Users can download the data from:
 - UDISE+: https://udiseplus.gov.in
 - NFHS: https://dhsprogram.com
 
+
 ---
 
 Methodology
@@ -76,14 +77,29 @@ The analysis proceeds in five main steps:
 
 4. Dataset Merging
    UDISE and NFHS datasets are merged at the district level.
+Data
+District-level administrative data covering 28 districts with the following variables:
+anaemia – prevalence of anaemia among children
+infra_index_full – composite infrastructure index
+infra_index_wash – WASH-specific infrastructure index
+sanitation – sanitation coverage
+drinking_water – access to drinking water
 
-5. Statistical Analysis
-   Ordinary Least Squares (OLS) regressions are estimated:
-   
-   - Anaemia vs Full Infrastructure Index
-   - Anaemia vs WASH Infrastructure Index
-   
-   Household sanitation and drinking water access are included as controls.
+Methodology
+Two OLS regression models are estimated.
+Model 1
+Anaemia ~ Infrastructure Index (Full) + Sanitation + Drinking Water
+Model 2
+Anaemia ~ WASH Infrastructure Index + Sanitation + Drinking Water
+The models are estimated using R and summarized using the broom package.
+Key Results
+Both models show no statistically significant relationship between WASH infrastructure indices and anaemia prevalence.
+
+Key observations:
+None of the predictors are statistically significant (p > 0.05).
+Adjusted R² is negative, indicating the models perform worse than a simple mean prediction.
+Infrastructure indices show positive coefficients, likely reflecting estimation noise rather than a true relationship.
+Model 2 provides a slightly better fit but remains inconclusive.
 
 ---
 
