@@ -169,10 +169,12 @@ data_raw/
 
 scripts/
     01_udise_panel_construction.R
-    02_udise_infrastructure_index.R
-    03_nfhs_clean.R
-    04_merge_analysis.R
-    05_descriptive_visualization.R
+    02_cleaned_odisha_districts.R
+    03_infrastructure_index_constructon.R
+    04_nfhs_odisha_cleaned.R
+    05_merge_udise_nfhs.R
+    06_analysis_model.R
+    07_visualization.R
 
 output/
     infra_index_full_distribution.png
