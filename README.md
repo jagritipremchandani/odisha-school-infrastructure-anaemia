@@ -79,6 +79,18 @@ Measure utilisation, not just availability
 Exploit a source of exogenous variation in infrastructure rollout — a phase-in schedule, eligibility threshold, or policy change — to isolate causal effects
 Track outcomes over time using panel data
 
+Replication 
+Raw datasets are not included in this repository due to size restrictions.
+
+Data sources:
+
+UDISE+ School Data
+https://udiseplus.gov.in
+
+National Family Health Survey (NFHS-5)
+https://dhsprogram.com
+
+Place the downloaded files in the data_raw folder before running the scripts.
 
 Repository Structure
 Code
